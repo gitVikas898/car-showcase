@@ -11,3 +11,18 @@ export interface CustomSearchbarProps{
     manufacturer :string;
     setmanufacturer:(manufacturer:string)=>void;
 }
+
+export interface CarProps {
+    city_mpg: number,
+    cla: 'string',
+    combination_mpg: number,
+    cylinders:number,
+    displacement: number,
+    drive: string,
+    fuel_type: string,
+    highway_mpg: number,
+    make:number,
+    model: number,
+    transmission: string,
+    year:number
+}
