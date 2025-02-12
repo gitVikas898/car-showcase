@@ -4,12 +4,16 @@ import Image from "next/image"
 import { CarProps } from "@/types"
 import { calculateCarRent } from "@/utils"
 import CustomButton from "./CustomButton"
+import CarDetails from "./CarDetails"
 
 interface CarCardProps {
     car:CarProps
 }
 
 const CarCard = ({car}:CarCardProps) => {
+
+    const [isOpen, setisOpen] = useState(false);
+
     const {city_mpg,year,make,model,transmission,drive}=car;
     const carRent = calculateCarRent(city_mpg,year);
 
@@ -26,7 +30,7 @@ const CarCard = ({car}:CarCardProps) => {
         <div className="relative w-full h-40 my-3 object-contain">
             <Image src={"/hero.png"} fill priority className="object-contain"  alt="car"/>
         </div>
-        <div className="realtive flex w-full mt-2">
+        <div className="realtive flex flex-col gap-2 w-full mt-2">
             <div className="flex group-hover:invisible w-full justify-between text-gray-750">
                 <div className="flex flex-col justify-center items-center gap-2">
                     <Image src={"/steering-wheel.svg"} alt="ster" width={20} height={20} />
@@ -47,15 +51,17 @@ const CarCard = ({car}:CarCardProps) => {
                     </p>
                 </div>
             </div>
-
-            <div className="car-card__btn-container">
+            <div className=" ">
                 <CustomButton 
-                title="View More"
-                containerStyles="w-full py-[16px]
-                rounded-full bg-primary-blue"
+                    title="View More"
+                    containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
+                    textStyles="text-white text-[14px] leading-[17px] font-bold"
+                    handleClick={()=>setisOpen(true)}
+                    rightIcon="/right-arrow.svg"
                 />
             </div>
         </div>
+        <CarDetails isOpen={isOpen} closeModal={()=>setisOpen(false)}car={car} />
     </div>
   )
 }
